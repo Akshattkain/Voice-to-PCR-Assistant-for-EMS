@@ -1,0 +1,24 @@
+{
+  "age": 71,
+  "sex": "male",
+  "chief_complaint": "Chest Pain/Discomfort",
+  "primary_impression": "Angina pectoris, unspecified",
+  "bp_systolic": 158,
+  "bp_diastolic": 94,
+  "heart_rate": 96,
+  "respiratory_rate": 18,
+  "spo2": 94,
+  "gcs_total": 15,
+  "avpu": "Alert",
+  "pain_scale": 8,
+  "allergies": ["penicillin"],
+  "medications_current": ["metoprolol", "aspirin"],
+  "past_medical_history": ["CAD", "hypertension"],
+  "medications_given": [
+    {"drug": "Aspirin", "dose": 324.0, "unit": "mg", "route": "PO"},
+    {"drug": "Nitroglycerin", "dose": 0.4, "unit": "mg", "route": "SL"}
+  ],
+  "procedures": ["12 lead electrocardiogram", "Catheterization of vein"],
+  "signs_symptoms": ["Chest pain, unspecified", "Generalized hyperhidrosis"],
+  "events_leading": "Patient was sitting at rest watching television when sudden onset chest pressure began approximately 20 minutes prior to EMS arrival."
+}
