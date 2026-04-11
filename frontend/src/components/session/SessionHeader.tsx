@@ -6,15 +6,16 @@ import { GapBadge } from '../gaps/GapBadge';
 
 interface SessionHeaderProps {
   onMicToggle?: () => void;
+  onWakeWordToggle?: () => void;
+  isWakeWordActive?: boolean;
   onFinalize?: () => void;
 }
 
-export function SessionHeader({ onMicToggle, onFinalize }: SessionHeaderProps) {
+export function SessionHeader({ onMicToggle, onWakeWordToggle, isWakeWordActive, onFinalize }: SessionHeaderProps) {
   const { sessionId, status } = useSessionStore();
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-3 border-b border-gray-800 bg-gray-900 px-4">
-      {/* Brand / session info */}
       <div className="flex items-center gap-2 shrink-0">
         <Activity size={18} className="text-blue-400" />
         <span className="text-sm font-semibold text-gray-100">Voice-to-PCR</span>
@@ -25,13 +26,10 @@ export function SessionHeader({ onMicToggle, onFinalize }: SessionHeaderProps) {
         )}
       </div>
 
-      {/* Completeness bar fills remaining space */}
       <CompletenessBar />
 
-      {/* Right controls */}
       <div className="flex items-center gap-3 shrink-0">
         <GapBadge />
-
         {status !== 'finalized' && (
           <button
             onClick={onFinalize}
@@ -41,15 +39,17 @@ export function SessionHeader({ onMicToggle, onFinalize }: SessionHeaderProps) {
             Finalize
           </button>
         )}
-
         {status === 'finalized' && (
           <span className="flex items-center gap-1 rounded-full bg-green-500/20 px-3 py-1 text-xs font-medium text-green-400">
             <CheckCircle2 size={12} />
             Finalized
           </span>
         )}
-
-        <MicButton onToggle={onMicToggle} />
+        <MicButton
+          onToggle={onMicToggle}
+          onWakeWordToggle={onWakeWordToggle}
+          isWakeWordActive={isWakeWordActive}
+        />
       </div>
     </header>
   );
