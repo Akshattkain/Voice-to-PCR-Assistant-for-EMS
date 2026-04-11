@@ -139,10 +139,30 @@ export function useSession() {
   }, [applyServerState]);
 
   /** Finalize the session on the backend. */
+  /** Finalize the session and download PCR JSON. */
   const handleFinalize = async () => {
     const sid = sessionIdRef.current;
     if (sid) {
       await fetch(`/api/v1/sessions/${sid}/finalize`, { method: 'POST' }).catch(() => {});
+
+      // Download PCR as JSON
+      try {
+        const res = await fetch(`/api/v1/sessions/${sid}/pcr/json`);
+        if (res.ok) {
+          const pcr = await res.json();
+          const blob = new Blob([JSON.stringify(pcr, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `pcr_${sid.slice(0, 8)}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      } catch (err) {
+        console.error('[useSession] PCR export error', err);
+      }
     }
     finalizeSession();
   };
