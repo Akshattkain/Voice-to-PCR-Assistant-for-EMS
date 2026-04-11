@@ -201,7 +201,7 @@ output = {
     "n_samples": len(samples),
     "sample_predictions": [
         {"pred": p, "gold": g}
-        for p, g in zip(all_pred_pcrs[:20], all_gold_pcrs[:20])
+        for p, g in zip(all_pred_pcrs, all_gold_pcrs)
     ]
 }
 
